@@ -1,0 +1,22 @@
+{
+  "name": "node-red-contrib-meobox",
+  "version": "1.0.0",
+  "description": "A Node-RED node which controls a MeoBox (and possibly any other Microsoft Mediaroom based box) over Telnet",
+  "keywords": [
+    "node-red",
+    "node-red-contrib",
+    "contrib",
+    "telnet",
+    "Microsoft Mediaroom",
+    "meobox"
+  ],
+  "node-red": {
+    "nodes": {
+      "file-function": "meobox.js"
+    }
+  },
+  "author": {
+    "name": "Jónatas Ferreira"
+  },
+  "license": "Apache"
+}

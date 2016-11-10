@@ -1,0 +1,105 @@
+﻿<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="meobox">
+    <div class="form-row">
+        <label for="node-input-host"><i class="fa fa-dot-circle-o"></i> Host</label>
+        <input type="text" id="node-input-host" placeholder="192.168.1.62">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="fa fa-random"></i> Port</label>
+        <input type="text" id="node-input-port" placeholder="Port">
+    </div>
+    <div class="form-row">
+        <label for="node-input-key"><i class="fa fa-tag"></i> Key</label>
+        <select id="node-input-key" style='width:70%'>
+            <option value="-"> - set by msg.payload -</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="back">back</option>
+            <option value="ok">ok</option>
+            <option value="p+">p+</option>
+            <option value="p-">p-</option>
+            <option value="menu">menu</option>
+            <option value="up">up</option>
+            <option value="down">down</option>
+            <option value="left">left</option>
+            <option value="right">right</option>
+            <option value="options">options</option>
+            <option value="guiatv">guiatv</option>
+            <option value="videoclube">videoclube</option>
+            <option value="gravacoes">gravacoes</option>
+            <option value="teletext">teletext</option>
+            <option value="prev">prev</option>
+            <option value="rewind">rewind</option>
+            <option value="play/pause">play/pause</option>
+            <option value="forward">forward</option>
+            <option value="next">next</option>
+            <option value="stop">stop</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="yellow">yellow</option>
+            <option value="blue">blue</option>
+            <option value="switchscreen">switchscreen</option>
+            <option value="i">i</option>
+            <option value="mute">mute</option>
+            <option value="v-">v-</option>
+            <option value="v+">v+</option>
+            <option value="record">record</option>
+            <option value="power">power</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="meobox">
+    <p>This node controls a MeoBox (and possibly any other Microsoft Mediaroom based box) over Telnet.</p>
+<p>Both Host, Port and Key can either be set on the node itself or via <b>msg.host</b>, <b>msg.port</b> and <b>msg.payload</b> respectively.</p>
+<p><b>msg.payload</b> can contain multiple keys to be sent separate by “<b>;</b>”.</p>
+<pre>{“payload”: “v+;p+;v-“}</pre>
+<p>Numeric values are interpreted as channels and treated like such</p>
+<pre>{“payload”: “123“}</pre>
+<p>The above will change to channel 123 by sending key 1, key 2 and key 3 on 750ms intervals.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('meobox',{
+        category: 'network',
+        color: "#2C87E8",
+        defaults: {
+            host: { value: "" , required: true},
+            port: { value: "8082", required: true, validate: RED.validators.number() },
+            key: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "remote.png",
+        label: function() {
+            return (this.host + (this.key && this.key != "-" ? " [" + this.key + "]" : "")) || 'MeoBox';
+        },
+        paletteLabel: function () {
+            return 'MeoBox';
+        },
+        labelStyle: function() {
+            return this.host?"node_label_italic":"";
+        }
+    });
+</script>
