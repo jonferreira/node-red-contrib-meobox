@@ -18,5 +18,13 @@
   "author": {
     "name": "Jónatas Ferreira"
   },
-  "license": "Apache"
+  "license": "Apache",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonferreira/node-red-contrib-meobox"
+  },
+  "bugs": {
+    "url": "https://github.com/jonferreira/node-red-contrib-meobox/issues"
+  },
+  "homepage": "https://github.com/jonferreira/node-red-contrib-meobox"
 }
